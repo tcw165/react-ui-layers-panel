@@ -1,0 +1,24 @@
+{
+  "name": "React - A Graphics Layers Panel",
+  "version": "0.0.1",
+  "description": "A panel for sort/hide/lock/delete/duplicate layers.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node build.js"
+  },
+  "engines": {
+    "node": "0.12.2"
+  },
+  "keywords": [
+    "ui",
+    "component",
+    "react",
+    "flux"
+  ],
+  "author": "boyw165",
+  "license": "MIT",
+  "homepage": "https://github.com/boyw165/lab-js#readme",
+  "dependencies": {},
+  "devDependencies": {}
+}
