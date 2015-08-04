@@ -1,12 +1,23 @@
 {
-  "name": "React - A Graphics Layers Panel",
+  "name": "react-ui-graphics-layers-panel",
   "version": "0.0.1",
-  "description": "A panel for sort/hide/lock/delete/duplicate layers.",
-  "main": "index.js",
-  "scripts": {
-    "start": "node server.js",
-    "test": "node build.js"
+  "description": "A Photoshop-liked panel for sorting/hiding/locking/deleting/duplicating layers.",
+  "license": "MIT",
+  "author": {
+    "name": "boyw165",
+    "email": "boyw165@gmail.com",
+    "url": "https://boyw165.wordpress.com/"
   },
+  "scripts": {
+    "prestart": "rm -rf ./dist",
+    "start": "jsx ./src ./dist && watchify -t [reactify --target es5] ./demo/index.js -v -d -o ./demo/bundle.js",
+    "prepublish": "rm -rf ./dist",
+    "publish": "jsx ./src ./dist && browserify -t [reactify --target es5] ./demo/index.js -v -d -o ./demo/bundle.js"
+  },
+  "files": [
+    "index.js",
+    "src/"
+  ],
   "engines": {
     "node": "0.12.2"
   },
@@ -16,9 +27,19 @@
     "react",
     "flux"
   ],
-  "author": "boyw165",
-  "license": "MIT",
-  "homepage": "https://github.com/boyw165/lab-js#readme",
-  "dependencies": {},
-  "devDependencies": {}
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/boyw165/react-ui-layers-panel.git"
+  },
+  "homepage": "https://github.com/boyw165/react-ui-layers-panel#readme",
+  "dependencies": {
+    "flux": "^2.0.3",
+    "react": "^0.13.3"
+  },
+  "devDependencies": {
+    "browserify": "^11.0.1",
+    "react-tools": "^0.13.3",
+    "reactify": "^1.1.1",
+    "watchify": "^3.3.1"
+  }
 }

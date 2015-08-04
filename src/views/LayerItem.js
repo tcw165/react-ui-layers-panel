@@ -3,11 +3,11 @@ var LayerAction = require('../actions/LayerAction');
 
 var CSS = {
 
-  visibleCheckbox: 'visible-checkbox',
-  visibleChecked: 'visible-checked',
+  VISIBLE: 'ui-visible',
+  INVISIBLE: 'ui-invisible',
 
-  lockedCheckbox: 'locked-checkbox',
-  lockedChecked: 'locked-checked'
+  LOCKED: 'ui-locked',
+  UNLOCKED: 'ui-unlocked'
 
 };
 
@@ -24,7 +24,7 @@ var LayerItem = React.createClass({
   render: function() {
     return (
       <li id={this.props.id}
-          className='ui-sortable'
+          className='ui-layer'
           style={this.props.style}
           onMouseDown={this.props.onMouseDown}
           onMouseUp={this.props.onMouseUp} >
@@ -62,23 +62,11 @@ var LayerItem = React.createClass({
   // Private Functions /////////////////////////////////////////////////////////
 
   _visibleCss: function() {
-    var css = CSS.visibleCheckbox;
-
-    if (this.props.isVisible) {
-      css += ' ' + CSS.visibleChecked;
-    }
-
-    return css;
+    return this.props.isVisible ? CSS.VISIBLE : CSS.INVISIBLE;
   },
 
   _lockedCss: function() {
-    var css = CSS.lockedCheckbox;
-
-    if (this.props.isLocked) {
-      css += ' ' + CSS.lockedChecked;
-    }
-
-    return css;
+    return this.props.isLocked ? CSS.LOCKED : CSS.UNLOCKED;
   },
 
   _deleteLayer: function(e) {

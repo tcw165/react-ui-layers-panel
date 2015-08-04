@@ -1,5 +1,5 @@
-var LayerStore = require('../stores/LayerStore');
-var LayerAction = require('../actions/LayerAction');
+var LayerStore = require('./stores/LayerStore');
+var LayerAction = require('./actions/LayerAction');
 var LayerDispatcher = require('flux').Dispatcher;
 
 /**

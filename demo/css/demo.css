@@ -1,0 +1,75 @@
+/* * { */
+/*   padding:20; */
+/*   margin:0; */
+/* } */
+
+/* html { */
+/*   font:14px normal Arial, sans-serif; */
+/*   color:#626771; */
+/*   background-color:#fff; */
+/* } */
+
+body {
+  font-family: 'Open Sans', 'Arial', sans-serif;
+  background-color: #f3f3f3;
+  margin:0px;
+}
+
+.ui-noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+div.ui-layer-panel {
+
+}
+
+div.ui-layer-header {
+
+}
+
+li.ui-layer {
+  margin: 0 3px 3px 3px;
+  padding: 0px;
+  padding-left: 0.8em;
+  font-size: 1.4em;
+  height: 40px;
+  border: 1px solid #d3d3d3;
+  background: #e6e6e6 url("../images/ui-li-bg-1x400.png") 50% 50% repeat-x;
+}
+
+input {
+
+}
+
+input.ui-visible {
+  height: 20px;
+  width: 20px;
+  display:inline-block;
+  padding: 3px 3px 3px 3px;
+}
+
+input.ui-invisible {
+  height: 20px;
+  width: 20px;
+  display:inline-block;
+  padding: 3px 3px 3px 3px;
+}
+
+input.ui-locked {
+  height: 20px;
+  width: 20px;
+  display:inline-block;
+  padding: 3px 3px 3px 3px;
+}
+
+input.ui-unlocked {
+  height: 20px;
+  width: 20px;
+  display:inline-block;
+  padding: 3px 3px 3px 3px;
+}
