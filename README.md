@@ -1,4 +1,4 @@
-React UI : Layers Pannel
+React UI : Layers Panel
 =======================
 
 It's a Photoshop-liked layers pannel (build on [React](https://github.com/facebook/react) / [Flux](https://github.com/facebook/flux)) supporting **SORT** / **HIDE** / **LOCK** / **DELETE** / **DUPLICATE** layers. I assume you're already familiar with [React](https://github.com/facebook/react) and [Flux](https://github.com/facebook/flux). Check them out if you're not.
@@ -8,7 +8,9 @@ It's a Photoshop-liked layers pannel (build on [React](https://github.com/facebo
 Demo
 ----
 
-[demo](./demo/index.html)
+![alt capture from Facebook](./demo/images/demo.gif)
+
+[demo](https://dl.dropboxusercontent.com/u/3587501/react/ui/layers-panel/index.html)
 
 Usage
 -----

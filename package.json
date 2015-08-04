@@ -9,9 +9,7 @@
     "url": "https://boyw165.wordpress.com/"
   },
   "scripts": {
-    "prestart": "rm -rf ./dist",
     "start": "jsx ./src ./dist && watchify -t [reactify --target es5] ./demo/index.js -v -d -o ./demo/bundle.js",
-    "prepublish": "rm -rf ./dist",
     "publish": "jsx ./src ./dist && browserify -t [reactify --target es5] ./demo/index.js -v -d -o ./demo/bundle.js"
   },
   "files": [

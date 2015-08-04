@@ -87,7 +87,7 @@ var LayersPanel = React.createClass({displayName: "LayersPanel",
             onChange: this._toggleAllLocked}, 
             "Toggle Locked"
           ), 
-          React.createElement("span", null, "Snapshot")
+          React.createElement("span", null, " | Snapshot")
         ), 
         React.createElement("ul", {style: {position: 'relative'}}, 
           layers
@@ -259,13 +259,13 @@ var LayersPanel = React.createClass({displayName: "LayersPanel",
 
   _isAllVisible: function() {
     return this.state.layers.every(function(layer) {
-      return layer.isVisible === true;
+      return layer.id === '$placeholder' || layer.isVisible === true;
     });
   },
 
   _isAllLocked: function() {
     return this.state.layers.every(function(layer) {
-      return layer.isLocked === true;
+      return layer.id === '$placeholder' || layer.isLocked === true;
     });
   },
 

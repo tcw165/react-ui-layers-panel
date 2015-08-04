@@ -87,7 +87,7 @@ var LayersPanel = React.createClass({
             onChange={this._toggleAllLocked}>
             Toggle Locked
           </input>
-          <span>Snapshot</span>
+          <span> | Snapshot</span>
         </div>
         <ul style={{position: 'relative'}}>
           {layers}
@@ -259,13 +259,13 @@ var LayersPanel = React.createClass({
 
   _isAllVisible: function() {
     return this.state.layers.every(function(layer) {
-      return layer.isVisible === true;
+      return layer.id === '$placeholder' || layer.isVisible === true;
     });
   },
 
   _isAllLocked: function() {
     return this.state.layers.every(function(layer) {
-      return layer.isLocked === true;
+      return layer.id === '$placeholder' || layer.isLocked === true;
     });
   },
 
