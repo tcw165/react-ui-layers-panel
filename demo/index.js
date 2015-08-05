@@ -50,6 +50,7 @@ $(document).ready(function() {
 
       return (
         <div className='chart'>
+          <h1>DIV Layers</h1>
           {layers}
         </div>
       );
@@ -80,12 +81,12 @@ $(document).ready(function() {
 
   React.render(
     <LayersPanel store={store}/>,
-    document.getElementById('react-example')
+    document.getElementById('layers-panel-example')
   );
 
   // Add something into the store.
   var layers = [];
-  for (var i = 0; i < 5; ++i) {
+  for (var i = 0; i < 10; ++i) {
     var n = Math.floor(50 + 399 * Math.random());
 
     layers.push({

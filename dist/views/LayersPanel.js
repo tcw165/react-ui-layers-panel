@@ -86,14 +86,14 @@ var LayersPanel = React.createClass({displayName: "LayersPanel",
             checked: this._isAllLocked(), 
             onChange: this._toggleAllLocked}, 
             "Toggle Locked"
-          ), 
-          React.createElement("span", null, " | Snapshot")
+          )
         ), 
-        React.createElement("ul", {style: {position: 'relative'}}, 
+        React.createElement("ul", {className: "ui-layer-container", style: {position: 'relative'}}, 
           layers
         )
       )
     );
+    // <ul style={{position: 'relative'}}>
   },
 
   //////////////////////////////////////////////////////////////////////////////
@@ -248,7 +248,7 @@ var LayersPanel = React.createClass({displayName: "LayersPanel",
 
     this._position = {
       // left: e.clientX - pBound.left - this._offset.x,
-      left: 50,
+      left: 5,
       top: e.clientY - pBound.top - this._offset.y
     };
 

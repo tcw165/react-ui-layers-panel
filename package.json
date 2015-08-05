@@ -1,5 +1,5 @@
 {
-  "name": "react-ui-graphics-layers-panel",
+  "name": "react-ui-layers-panel",
   "version": "0.0.1",
   "description": "A Photoshop-liked panel for sorting/hiding/locking/deleting/duplicating layers.",
   "license": "MIT",

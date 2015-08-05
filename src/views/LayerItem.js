@@ -40,7 +40,7 @@ var LayerItem = React.createClass({
           className={this._lockedCss()}
           onMouseOver={this.props.onMouseOver}
           onMouseOut={this.props.onMouseOut} />
-        <span>{' ' + this.props.id + ' '}</span>
+        <span>{'Layer: ' + this.props.id}</span>
         <button onClick={this._deleteLayer}>
           delete
         </button>

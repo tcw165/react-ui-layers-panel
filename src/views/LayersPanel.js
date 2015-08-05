@@ -87,13 +87,13 @@ var LayersPanel = React.createClass({
             onChange={this._toggleAllLocked}>
             Toggle Locked
           </input>
-          <span> | Snapshot</span>
         </div>
-        <ul style={{position: 'relative'}}>
+        <ul className='ui-layer-container' style={{position: 'relative'}}>
           {layers}
         </ul>
       </div>
     );
+    // <ul style={{position: 'relative'}}>
   },
 
   //////////////////////////////////////////////////////////////////////////////
@@ -248,7 +248,7 @@ var LayersPanel = React.createClass({
 
     this._position = {
       // left: e.clientX - pBound.left - this._offset.x,
-      left: 50,
+      left: 5,
       top: e.clientY - pBound.top - this._offset.y
     };
 
