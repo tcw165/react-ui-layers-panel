@@ -6,7 +6,7 @@ var LAYER_PROTO = {
   isVisible: true,
   isLocked: false,
   isDragged: false,
-  snapshot: undefined
+  data: undefined
 };
 
 function idGen() {
@@ -27,26 +27,25 @@ function copy(obj) {
  * LayerStore is the data module.
  */
 function LayerStore(layers) {
-  if (!(layers instanceof Array)) throw new TypeError('layers should be an array.');
-
   /**
    * Array of layers object. Format of single layer is like...
    * {
    *   id: {String},
    *   isVisible: {Bool},
    *   isLocked: {Bool},
-   *   snapshot: {<svg>|<img>|String|id}
+   *   data: {<svg>|<img>|String|id}
    * }
    */
-  this._layers = layers.map(function(layer, i) {
-    var ret = copy(LAYER_PROTO);
+  this._layers = layers instanceof Array ?
+    layers.map(function(layer, i) {
+      var ret = copy(LAYER_PROTO);
 
-    ret.id = idGen();
-    ret.isVisible = layer.isVisible || true;
-    ret.isLocked = layer.isLocked || false;
+      ret.id = idGen();
+      ret.isVisible = layer.isVisible || true;
+      ret.isLocked = layer.isLocked || false;
 
-    return ret;;
-  });
+      return ret;;
+    }) : [];
 }
 
 util.inherits(LayerStore, events.EventEmitter);
@@ -107,15 +106,29 @@ LayerStore.prototype.exchangeLayers = function(from, to) {
   return false;
 }
 
-LayerStore.prototype.insertLayer = function(token, isVisible, isLocked, snapshot) {
-  var layer = copy(LAYER_PROTO);
+LayerStore.prototype.insertLayer = function(token, layer) {
+  var newLayer = copy(LAYER_PROTO);
 
-  layer.id = idGen();
-  layer.isVisible = isVisible || true;
-  layer.isLocked = isLocked || false;
-  layer.snapshot = snpashot;
+  newLayer.id = idGen();
+  newLayer.isVisible = layer.isVisible || true;
+  newLayer.isLocked = layer.isLocked || false;
+  newLayer.data = layer.data;
 
-  this._layers.splice(token + 1, 0, layer);
+  if (token >= 0 && token < this._layers.length) {
+    this._layers.splice(token + 1, 0, newLayer);
+  } else {
+    this._layers.push(newLayer);
+  }
+
+  return true;
+};
+
+LayerStore.prototype.insertLayers = function(token, layers) {
+  if (!(layers instanceof Array)) return false;
+
+  for (var i = 0, j = layers.length; i < j; ++i) {
+    this.insertLayer(token + i, layers[i]);
+  }
 
   return true;
 };

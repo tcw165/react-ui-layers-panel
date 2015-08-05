@@ -40,9 +40,7 @@ var LayerItem = React.createClass({
           className={this._lockedCss()}
           onMouseOver={this.props.onMouseOver}
           onMouseOut={this.props.onMouseOut} />
-        <input
-          type='text'
-          placeholder={this.props.store.getLayerState(this.props.token).id} />
+        <span>{' ' + this.props.id + ' '}</span>
         <button onClick={this._deleteLayer}>
           delete
         </button>

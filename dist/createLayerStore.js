@@ -47,6 +47,21 @@ module.exports = function(layers) {
       store.publish();
       break;
 
+    case LayerAction.INSERT_LAYER:
+      var isChanged = false;
+      var token = action.token;
+      var layers = action.layers;
+
+      if (layers instanceof Array) {
+        isChanged = store.insertLayers(token, layers);
+      } else {
+        var layer = layers;
+        isChanged = store.insertLayer(token, layer);
+      }
+
+      if (isChanged) store.publish();
+      break;
+
     case LayerAction.DELETE_LAYER:
       var token = action.token;
 

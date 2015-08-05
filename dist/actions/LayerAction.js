@@ -20,11 +20,12 @@ LayerAction.verify = function(obj) {
 
 LayerAction.SET_LAYER_STATE = 0;
 LayerAction.SET_ALL_LAYERS_STATE = 1;
-LayerAction.DELETE_LAYER = 2;
-LayerAction.DUPLICATE_LAYER = 3;
-LayerAction.START_DRAG_LAYER = 4;
-LayerAction.STOP_DRAG_LAYER = 5;
-LayerAction.MOVE_DRAGGED_LAYER = 6;
+LayerAction.INSERT_LAYER = 2;
+LayerAction.DELETE_LAYER = 3;
+LayerAction.DUPLICATE_LAYER = 4;
+LayerAction.START_DRAG_LAYER = 5;
+LayerAction.STOP_DRAG_LAYER = 6;
+LayerAction.MOVE_DRAGGED_LAYER = 7;
 
 LayerAction.prototype.setLayerState = function(token, isVisible, isLocked) {
   this._dispatcher.dispatch({
@@ -42,6 +43,18 @@ LayerAction.prototype.setAllLayerState = function(isVisible, isLocked) {
     isLocked: isLocked
   });
 };
+
+LayerAction.prototype.insertLayer = function(token, layer) {
+  this._dispatcher.dispatch({
+    type: LayerAction.INSERT_LAYER,
+    token: token,
+    layers: layer
+  });
+}
+
+LayerAction.prototype.insertLayers = function(token, layers) {
+  this.insertLayer(token, layers);
+}
 
 LayerAction.prototype.deleteLayer = function(token) {
   this._dispatcher.dispatch({

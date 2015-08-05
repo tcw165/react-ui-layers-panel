@@ -33,14 +33,14 @@ var LayersPanel = require('react-ui-layers-panel').LayersPannel;
 var createLayerStore = require('react-ui-layers-panel').createLayerStore;
 
 // Initialize the store for the LayerPanel.
-var store = createLayerStore([{isVisible: true, isLocked: false, snapshot: 1111},
-                            {isVisible: false, isLocked: true, snapshot: 2222},
-                            {isVisible: false, isLocked: false, snapshot: 3333},
-                            {isVisible: true, isLocked: false, snapshot: 4444},
-                            {isVisible: false, isLocked: true, snapshot: 5555}]);
+var store = createLayerStore([{isVisible: true, isLocked: false, data: 1111},
+                              {isVisible: false, isLocked: true, data: 2222},
+                              {isVisible: false, isLocked: false, data: 3333},
+                              {isVisible: true, isLocked: false, data: 4444},
+                              {isVisible: false, isLocked: true, data: 5555}]);
 
 React.render(
-  <LayerPanel store={store} />,
+  <LayerPanel store={store}/>,
   document.getElementById('react-example')
 );
 ```
@@ -53,14 +53,13 @@ Actually `require('react-ui-layers-panel')` returns an object containing the `st
 
 Layer Store API
 ---------------
-Layer object is very simple, it only has few properties. These are properties you'd care.
+You should care about the format of **Layer Object**. It is quite simple and only has few properties. These are properties you'd care.
 
 ```
 {
-  id: 123,
   isVisible: true,
   isLocked: false,
-  snapshot: SVGSVGElement 
+  data: arbitrary object | null | undefined
 }
 ```
 
@@ -109,12 +108,18 @@ The APIs you'd care:
 
 ```
 /**
- * @param {Integer} token - The position of the layer in store you want to insert.
- * @param {Boolean} isVisible - Whether the layer is visible or not.
- * @param {Boolean} isLocked - Whether the layer is locked or not.
- * @param {SVGSVGElement} snapshot - The SVG element.
+ * @param {Integer} token - The position of the layer in store you want to insert. Append it to the end if undefined.
+ * @param {Object} layer - A layer object.
  */
-insertLayer(token, isVisible, isLocked, snapshot)
+insertLayer(token, layer)
+```
+
+```
+/**
+ * @param {Integer} token - The position of the layer in store you want to insert. Append it to the end if undefined.
+ * @param {Object} layer - Array of layer objects.
+ */
+insertLayers(token, layers)
 ```
 
 ```
