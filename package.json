@@ -1,6 +1,6 @@
 {
   "name": "react-ui-layers-panel",
-  "version": "0.0.1",
+  "version": "0.0.6",
   "description": "A Photoshop-liked panel for sorting/hiding/locking/deleting/duplicating layers.",
   "license": "MIT",
   "author": {
@@ -9,15 +9,19 @@
     "url": "https://boyw165.wordpress.com/"
   },
   "scripts": {
-    "start": "jsx ./src ./dist && watchify -t [reactify --target es5] ./demo/index.js -v -d -o ./demo/bundle.js",
-    "publish": "jsx ./src ./dist && browserify -t [reactify --target es5] ./demo/index.js -v -d -o ./demo/bundle.js"
+    "start": "jsx ./src ./dist && watchify --external react -t [reactify --target es5] ./demo/index.js -v -d -o ./demo/bundle.js",
+    "publish": "jsx ./src ./dist && browserify --external react -t [reactify --target es5] ./demo/index.js -v -d -o ./demo/bundle.js"
   },
   "files": [
     "index.js",
-    "src/"
+    "dist/createLayerStore.js",
+    "dist/actions/LayerAction.js",
+    "dist/stores/LayerStore.js",
+    "dist/views/LayerItem.js",
+    "dist/views/LayersPanel.js"
   ],
   "engines": {
-    "node": "0.12.2"
+    "node": "^0.12.2"
   },
   "keywords": [
     "ui",

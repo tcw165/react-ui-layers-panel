@@ -1,5 +1,7 @@
 // Main entry.
 $(document).ready(function() {
+  var React = typeof window === 'object' ? window.React : require('react');
+
   var SomeLayersCanvas = React.createClass({
 
     getInitialState: function() {

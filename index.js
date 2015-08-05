@@ -1,9 +1,6 @@
-var layerFactory = require('./dist/layerFactory');
-var LayerContainer = require('./dist/views/LayerContainer');
-
 'use strict';
 
 module.exports = {
-  createLayerStore: layerFactory,
-  LayerPanel: LayerContainer
+  createLayerStore: require('./dist/createLayerStore'),
+  LayersPanel: require('./dist/views/LayersPanel')
 };

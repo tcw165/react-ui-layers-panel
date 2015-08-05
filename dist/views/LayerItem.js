@@ -1,3 +1,6 @@
+'use strict';
+
+var React = typeof window === 'object' ? window.React : require('react');
 var LayerStore = require('../stores/LayerStore');
 var LayerAction = require('../actions/LayerAction');
 

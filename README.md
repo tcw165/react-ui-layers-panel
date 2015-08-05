@@ -1,7 +1,7 @@
 React UI : Layers Panel
 =======================
 
-It's a Photoshop-liked layers pannel (build on [React](https://github.com/facebook/react) / [Flux](https://github.com/facebook/flux)) supporting **SORT** / **HIDE** / **LOCK** / **DELETE** / **DUPLICATE** layers. I assume you're already familiar with [React](https://github.com/facebook/react) and [Flux](https://github.com/facebook/flux). Check them out if you're not.
+It's a Photoshop-liked layers pannel (build on [React](https://github.com/facebook/react) / [Flux](https://github.com/facebook/flux)) supporting **SORT** / **HIDE** / **LOCK** / **DELETE** / **DUPLICATE** layers. I assume you're already familiar with [React](https://github.com/facebook/react) and [Flux](https://github.com/facebook/flux). Check them out if not.
 
 > This project is still young. Feel free to correct me if there're wrong/bad codes.
 
@@ -19,20 +19,25 @@ Before creating component you should create `layers store` for the componenet. T
 
 ```
 var createLayerStore = require('react-ui-layers-panel').createLayerStore;
-var store = createLayerStore([{isVisible: true, isLocked: false, snapshot: SVGSVGElement}]);
+var store = createLayerStore([{isVisible: true, isLocked: false, data: {tagName: 'svg', ...}}]);
 
 ```
+If you use [browserify](https://github.com/substack/node-browserify) or [watchify](https://github.com/substack/watchify) to build JavaScript bundle, remember to externalize the `react` for better performance and less size of JavaScript bundle.
 
-> Note: I'm still working on publishing it to the NPM. Before that, you might not be able to use `require('react-ui-layers-panel')`.
-
-
-Complete Example:
+Example:
 
 ```
+browserify --external react ...
+```
+
+Component (view) and its data (module) Example:
+
+```
+var React = typeof window === 'object' ? window.React : require('react');
 var LayersPanel = require('react-ui-layers-panel').LayersPannel;
 var createLayerStore = require('react-ui-layers-panel').createLayerStore;
 
-// Initialize the store for the LayerPanel.
+// Initialize the store for the LayersPanel.
 var store = createLayerStore([{isVisible: true, isLocked: false, data: 1111},
                               {isVisible: false, isLocked: true, data: 2222},
                               {isVisible: false, isLocked: false, data: 3333},
@@ -40,16 +45,17 @@ var store = createLayerStore([{isVisible: true, isLocked: false, data: 1111},
                               {isVisible: false, isLocked: true, data: 5555}]);
 
 React.render(
-  <LayerPanel store={store}/>,
+  <LayersPanel store={store}/>,
   document.getElementById('react-example')
 );
 ```
 
-Actually `require('react-ui-layers-panel')` returns an object containing the `store` and `action` properties. You could use `action` to apply changes to layers and get layer's properties through `store`.
+Actually `createLayerStore ` returns an object containing the `store` and `action` properties. You could use `action` to apply changes to layers and get layer's properties through `store`.
 
 > Note: You **SHOULD NOT** change the layer store directly. Or it will break the logic and make the whole system inconsistent.
 
 ![alt capture from Facebook](./demo/images/flux-simple-f8-diagram-explained-1300w.png)
+copyright@Facebook
 
 Layer Store API
 ---------------
