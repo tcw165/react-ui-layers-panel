@@ -9,8 +9,8 @@
     "url": "https://boyw165.wordpress.com/"
   },
   "scripts": {
-    "start": "jsx ./src ./dist && watchify --external react -t [reactify --target es5] ./demo/index.js -v -d -o ./demo/bundle.js",
-    "publish": "jsx ./src ./dist && browserify --external react -t [reactify --target es5] ./demo/index.js -v -d -o ./demo/bundle.js"
+    "start": "jsx ./src ./dist && watchify -x react -x immutable -t [reactify --target es5] ./demo/index.js -v -d -o ./demo/bundle.js",
+    "publish": "jsx ./src ./dist && browserify -x react -x immutable -t [reactify --target es5] ./demo/index.js -v -d -o ./demo/bundle.js"
   },
   "files": [
     "index.js",
@@ -36,12 +36,14 @@
   "homepage": "https://github.com/boyw165/react-ui-layers-panel#readme",
   "dependencies": {
     "flux": "^2.0.3",
+    "immutable": "^3.7.4",
     "react": "^0.13.3"
   },
   "devDependencies": {
     "browserify": "^11.0.1",
     "react-tools": "^0.13.3",
     "reactify": "^1.1.1",
+    "trip.js": "^3.0.0",
     "watchify": "^3.3.1"
   }
 }

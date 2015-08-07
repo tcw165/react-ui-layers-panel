@@ -106,4 +106,50 @@ $(document).ready(function() {
     });
   }
   layerAction.insertLayers(undefined, layers);
+
+  // Tutorial.
+  if (document.cookie !== 'demo=false') {
+    setTimeout(function() {
+      var trip = new Trip([{
+        sel: $('#chart-example'),
+        content: 'Assume this is the selection of your graphics.',
+        expose: true,
+        position: 'e',
+        delay: 3000
+      }, {
+        sel: $('#layers-panel-example'),
+        content: 'And this is the Photoshop-liked layers panel.',
+        expose: true,
+        position: 'w',
+        delay: 3000
+      }, {
+        sel: $('.ui-layer')[0],
+        content: 'Drag the layer to alter the order.',
+        expose: true,
+        position: 'w',
+        delay: 3000
+      }, {
+        sel: $('.ui-layer-visible')[1],
+        content: 'Click to check/uncheck the visibility.',
+        expose: true,
+        position: 'w',
+        delay: 3000
+      }, {
+        sel: $('.ui-layer-visible')[1],
+        content: 'Or scroll the mouse to check/uncheck others visiblity.',
+        expose: true,
+        position: 'w',
+        delay: 3000
+      }], {
+        enableAnimation: false
+      });
+
+      trip.start();
+    }, 500);
+
+    var date = new Date();
+
+    date.setTime(date.getTime() + (30 * 60 * 1000));
+    document.cookie = 'demo=false' + ';expires=' + date.toGMTString() + ';path=/';
+  }
 });

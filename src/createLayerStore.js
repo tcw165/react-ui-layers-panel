@@ -1,3 +1,4 @@
+var Immutable = typeof window === 'object' ? window.Immutable : require('immutable');
 var LayerStore = require('./stores/LayerStore');
 var LayerAction = require('./actions/LayerAction');
 var LayerDispatcher = require('flux').Dispatcher;
@@ -23,11 +24,12 @@ module.exports = function(layers) {
   var store = new LayerStore(layers);
   var action = new LayerAction(dispatcher);
 
-  // Register callback to handle all updates.
-  dispatcher.register(function(action) {
-    switch(action.type) {
+  //////////////////////////////////////////////////////////////////////////////
+  // Dispatcher Callback ///////////////////////////////////////////////////////
 
-    case LayerAction.SET_LAYER_STATE:
+  var setLayerState = function(action) {
+    if (action.type === LayerAction.SET_LAYER_STATE) {
+      console.log(11111, action);
       var token = action.token;
       var isVisible = action.isVisible;
       var isLocked = action.isLocked;
@@ -35,9 +37,11 @@ module.exports = function(layers) {
       if (store.setLayerState(token, isVisible, isLocked, undefined)) {
         store.publish();
       }
-      break;
+    }
+  };
 
-    case LayerAction.SET_ALL_LAYERS_STATE:
+  var setAllLayersState = function(action) {
+    if (action.type === LayerAction.SET_ALL_LAYERS_STATE) {
       var isVisible = action.isVisible;
       var isLocked = action.isLocked;
 
@@ -45,9 +49,11 @@ module.exports = function(layers) {
         store.setLayerState(i, isVisible, isLocked, undefined);
       }
       store.publish();
-      break;
+    }
+  };
 
-    case LayerAction.INSERT_LAYER:
+  var insertLayer = function(action) {
+    if (action.type === LayerAction.INSERT_LAYER) {
       var isChanged = false;
       var token = action.token;
       var layers = action.layers;
@@ -60,33 +66,41 @@ module.exports = function(layers) {
       }
 
       if (isChanged) store.publish();
-      break;
+    }
+  };
 
-    case LayerAction.DELETE_LAYER:
+  var deleteLayer = function(action) {
+    if (action.type === LayerAction.DELETE_LAYER) {
       var token = action.token;
 
       if (store.removeLayer(token)) {
         store.publish();
       }
-      break;
+    }
+  };
 
-    case LayerAction.DUPLICATE_LAYER:
+  var duplicateLayer = function(action) {
+    if (action.type === LayerAction.DUPLICATE_LAYER) {
       var token = action.token;
 
       if (store.duplicateLayer(token)) {
         store.publish();
       }
-      break;
+    }
+  };
 
-    case LayerAction.START_DRAG_LAYER:
+  var startDragLayer = function(action) {
+    if (action.type === LayerAction.START_DRAG_LAYER) {
       var draggedToken = action.token;
 
       store.setLayerState(draggedToken, undefined, undefined, true);
       store.insertPlaceholder(draggedToken + 1);
       store.publish();
-      break;
+    }
+  };
 
-    case LayerAction.STOP_DRAG_LAYER:
+  var stopDragLayer = function(action) {
+    if (action.type === LayerAction.STOP_DRAG_LAYER) {
       var draggedToken = store.getDraggedLayerTokens()[0];
       var placeholderToken = store.getPlaceholderTokens()[0];
 
@@ -94,9 +108,11 @@ module.exports = function(layers) {
       store.exchangeLayers(draggedToken, placeholderToken);
       store.removePlaceholders();
       store.publish();
-      break;
+    }
+  };
 
-    case LayerAction.MOVE_DRAGGED_LAYER:
+  var moveDraggedLayer = function(action) {
+    if (action.type === LayerAction.MOVE_DRAGGED_LAYER) {
       var to = action.to;
       var isChanged = false;
 
@@ -114,10 +130,18 @@ module.exports = function(layers) {
       if (isChanged) {
         store.publish();
       }
-      break;
-
     }
-  });
+  };
+
+  // Register callback to handle all updates.
+  dispatcher.register(setLayerState);
+  dispatcher.register(setAllLayersState);
+  dispatcher.register(insertLayer);
+  dispatcher.register(deleteLayer);
+  dispatcher.register(duplicateLayer);
+  dispatcher.register(startDragLayer);
+  dispatcher.register(stopDragLayer);
+  dispatcher.register(moveDraggedLayer);
 
   // Return only store and action. Dispatcher is hidden for the outside world.
   return {

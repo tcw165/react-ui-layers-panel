@@ -1,3 +1,4 @@
+var Immutable = typeof window === 'object' ? window.Immutable : require('immutable');
 var events = require('events');
 var util = require('util');
 
@@ -17,7 +18,8 @@ function copy(obj) {
   var ret = {};
 
   for (var k in obj) {
-    ret[k] = obj[k];
+    if (obj.hasOwnProperty(k))
+      ret[k] = obj[k];
   }
 
   return ret;

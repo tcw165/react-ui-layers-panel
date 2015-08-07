@@ -6,11 +6,11 @@ var LayerAction = require('../actions/LayerAction');
 
 var CSS = {
 
-  VISIBLE: 'ui-visible',
-  INVISIBLE: 'ui-invisible',
+  VISIBLE: 'ui-layer-visible',
+  INVISIBLE: 'ui-layer-invisible',
 
-  LOCKED: 'ui-locked',
-  UNLOCKED: 'ui-unlocked'
+  LOCKED: 'ui-layer-locked',
+  UNLOCKED: 'ui-layer-unlocked'
 
 };
 
