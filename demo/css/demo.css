@@ -38,37 +38,33 @@ li.ui-layer {
   height: 40px;
   line-height: 40px;
   background: #535353;
+  cursor: -webkit-grab;
   border: 1px solid #323232;
   list-style: none;
   list-style-position: inside;
 }
 
-.ui-visible {
-  margin: 0;
-  padding: 0;
-  height: 40px;
-  width: 40px;
+li.ui-dragged-layer {
+  cursor: -webkit-grabbing;
 }
 
-.ui-invisible {
-  margin: 0;
-  padding: 0;
-  height: 40px;
-  width: 40px;
+input[type=checkbox] {
+  margin: 0 10px 0 0px;
 }
 
-.ui-locked {
-  margin: 0;
-  padding: 0;
-  height: 40px;
-  width: 40px;
+input[type=checkbox].ui-layer-visible {
+  display: inline-block;
+  background: url('../images/ui-layer-visible.jpg');
 }
 
-.ui-unlocked {
-  margin: 0;
-  padding: 0;
-  height: 40px;
-  width: 40px;
+.ui-layer-invisible {
+  background: url('../images/ui-layer-invisible.jpg') no-repeat;
+}
+
+.ui-layer-locked {
+}
+
+.ui-layer-unlocked {
 }
 
 .chart div {
@@ -80,10 +76,13 @@ li.ui-layer {
 }
 
 li > button {
-  margin: 0;
+  margin: 7px 2px 7px 2px;
   padding: 0 5px 0 5px;
   float: right;
-  height: 40px;
+  height: 26px;
+  border: 0;
+  border-radius: 5px;
+  /* background: #2969B0; */
 }
 
 li > span {

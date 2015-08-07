@@ -63,6 +63,7 @@ LayerStore.prototype.length = function() {
 }
 
 LayerStore.prototype.getAll = function() {
+  // TODO: Use immutable data to make reconciliation faster.
   return this._layers.slice(0);
 };
 

@@ -6,6 +6,9 @@ var LayerAction = require('../actions/LayerAction');
 
 var CSS = {
 
+  NORMAL: 'ui-layer',
+  DRAGGED: 'ui-dragged-layer',
+
   VISIBLE: 'ui-layer-visible',
   INVISIBLE: 'ui-layer-invisible',
 
@@ -21,13 +24,14 @@ var LayerItem = React.createClass({
     store: LayerStore.verify,
     action: LayerAction.verify,
     isVisible: React.PropTypes.bool,
-    isLocked: React.PropTypes.bool
+    isLocked: React.PropTypes.bool,
+    isDragged: React.PropTypes.bool
   },
 
   render: function() {
     return (
       <li id={this.props.id}
-          className='ui-layer'
+          className={this._layerCss()}
           style={this.props.style}
           onMouseDown={this.props.onMouseDown}
           onMouseUp={this.props.onMouseUp} >
@@ -61,6 +65,10 @@ var LayerItem = React.createClass({
 
   //////////////////////////////////////////////////////////////////////////////
   // Private Functions /////////////////////////////////////////////////////////
+
+  _layerCss: function() {
+    return this.props.isDragged ? CSS.NORMAL + ' ' + CSS.DRAGGED : CSS.NORMAL;
+  },
 
   _visibleCss: function() {
     return this.props.isVisible ? CSS.VISIBLE : CSS.INVISIBLE;

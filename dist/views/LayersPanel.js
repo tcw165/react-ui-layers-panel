@@ -1,6 +1,7 @@
 'use strict';
 
 var React = typeof window === 'object' ? window.React : require('react');
+var Immutable = typeof window === 'object' ? window.Immutable : require('immutable');
 var LayerStore = require('../stores/LayerStore');
 var LayerAction = require('../actions/LayerAction');
 var LayerItem = require('./LayerItem');
@@ -37,7 +38,7 @@ var LayersPanel = React.createClass({displayName: "LayersPanel",
       /**
        * @return {Object} Arbritrary type. It is used to force component to render.
        */
-      forcedUpdate: false
+      draggedPos: false
     };
   },
 
@@ -63,6 +64,7 @@ var LayersPanel = React.createClass({displayName: "LayersPanel",
                   token: i, 
                   isVisible: layer.isVisible, 
                   isLocked: layer.isLocked, 
+                  isDragged: layer.isDragged, 
                   style: self._layerInlineStyle(i), 
                   store: self.state.store, 
                   action: self.state.action, 
@@ -107,7 +109,7 @@ var LayersPanel = React.createClass({displayName: "LayersPanel",
 
   _offset: false,
 
-  _position: false,
+  // _position: false,
 
   _dragged: false,
 
@@ -127,12 +129,12 @@ var LayersPanel = React.createClass({displayName: "LayersPanel",
       style = {
         opacity: '0'
       };
-    } else if (store.getLayerState(token).isDragged && this._position) {
+    } else if (store.getLayerState(token).isDragged && this.state.draggedPos) {
       style = {
         position: 'absolute',
         zIndex: '100',
-        left: this._position.left + 'px',
-        top: this._position.top + 'px'
+        left: this.state.draggedPos.get('left') + 'px',
+        top: this.state.draggedPos.get('top') + 'px'
       };
     }
 
@@ -207,10 +209,12 @@ var LayersPanel = React.createClass({displayName: "LayersPanel",
     var action = this.state.action;
 
     if (this._dragged) {
+      this.setState({
+        draggedPos: false
+      });
       action.stopDragLayer();
     }
 
-    this._position = false;
     this._offset = false;
     this._dragged = false;
     this._draggedParent = false;
@@ -248,15 +252,14 @@ var LayersPanel = React.createClass({displayName: "LayersPanel",
 
   _updatePosition: function(e) {
     var pBound = this._draggedParent.getBoundingClientRect();
+    var newPos = this.state.draggedPos || Immutable.Map({left: 0, top: 0});
 
-    this._position = {
-      // left: e.clientX - pBound.left - this._offset.x,
-      left: 5,
-      top: e.clientY - pBound.top - this._offset.y
-    };
+    newPos = newPos
+      .set('left', 5)
+      .set('top', e.clientY - pBound.top - this._offset.y);
 
     this.setState({
-      forcedUpdate: Date.now()
+      draggedPos: newPos
     });
   },
 
